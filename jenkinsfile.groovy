@@ -11,11 +11,11 @@ pipeline {
             }
         }
 
-        // stage('Build Angular App') {
-        //     steps {
-        //         sh 'cd $ANGULAR_APP_DIR && ng build --prod'
-        //     }
-        // }
+        stage('Build Angular App') {
+            steps {
+                sh 'cd $ANGULAR_APP_DIR && ng build --prod'
+            }
+        }
 
         // stage('Deploy to EC2') {
         //     steps {
