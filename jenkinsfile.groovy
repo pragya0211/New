@@ -23,13 +23,24 @@ pipeline {
             }
         }
 
-        stage('Upload to S3') {
-            steps {
-                script {
+      stage('Upload to S3') {
+        steps {
+            script {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'my-aws-credential']]) {
                     sh "aws s3 sync dist/ s3://${S3_BUCKET}"
                 }
             }
         }
+      }
+
+        // stage('Upload to S3') {
+        //     steps {
+        //         script {
+                
+        //             sh "aws s3 sync dist/ s3://${S3_BUCKET}"
+        //         }
+        //     }
+        // }
 
         // stage('Deploy to EC2') {
         //     steps {
