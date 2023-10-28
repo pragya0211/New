@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         AWS_REGION = 'ap-south-1'
-        S3_BUCKET = 'my-new-angular-bucket
+        S3_BUCKET = 'my-new-angular-bucket'
         EC2_INSTANCE = 'http://3.6.92.89/'
         SSH_CREDENTIALS = credentials('my-ssh-credential')
     }
