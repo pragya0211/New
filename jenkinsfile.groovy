@@ -38,8 +38,8 @@ pipeline {
             steps {
                 script {
                     sshagent(credentials: ['my-ssh-credential']) {
-                        sh "scp -o StrictHostKeyChecking=no -i /Downloads/Anjen.pem -r dist/ ubuntu@${EC2_INSTANCE}:/var/www/html/"
-                        sh "ssh -o StrictHostKeyChecking=no -i /Downloads/Anjen.pem ubuntu@${EC2_INSTANCE} 'sudo systemctl restart apache2'"
+                        sh "scp -o StrictHostKeyChecking=no -i /home/ubuntu/key/Anjen.pem -r dist/ ubuntu@${EC2_INSTANCE}:/var/www/html/"
+                        sh "ssh -o StrictHostKeyChecking=no -i /home/ubuntu/key/Anjen.pem ubuntu@${EC2_INSTANCE} 'sudo systemctl restart apache2'"
                     }
                 }
             }
