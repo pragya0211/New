@@ -19,15 +19,15 @@ pipeline {
         stage('Build Angular App') {
             steps {
                 sh 'npm install'
-                sh 'npm run ng build --base-href /myapp/ --prod'
+                sh 'npm run ng build --prod'
             }
         }
 
       stage('Upload to S3') {
         steps {
             script {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'my-aws-credential']]) {
-                    sh "aws s3 sync dist/myapp/ s3://${S3_BUCKET}"
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'deshna-credentials']]) {
+                    sh "aws s3 sync dist/ s3://${S3_BUCKET}"
                 }
             }
         }
