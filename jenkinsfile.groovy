@@ -19,7 +19,7 @@ pipeline {
         stage('Build Angular App') {
             steps {
                 sh 'npm install'
-                sh 'npm run ng build --prod'
+                sh 'npm run ng build --base-href /myapp/ --prod'
             }
         }
 
@@ -27,7 +27,7 @@ pipeline {
         steps {
             script {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'my-aws-credential']]) {
-                    sh "aws s3 sync dist/ s3://${S3_BUCKET}"
+                    sh "aws s3 sync dist/myapp/ s3://${S3_BUCKET}"
                 }
             }
         }
