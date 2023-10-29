@@ -37,7 +37,7 @@ pipeline {
         //     steps {
         //         script {
                 
-        //             sh "aws s3 sync dist/ s3://${S3_BUCKET}"
+        //             sh "aws s3 sync dist/pragya/ s3://${S3_BUCKET}"
         //         }
         //     }
         // }
