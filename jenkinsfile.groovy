@@ -4,7 +4,7 @@ pipeline {
     environment {
         AWS_REGION = 'ap-south-1'
         S3_BUCKET = 'my-new-angular-bucket'
-        EC2_INSTANCE = '13.233.196.170'
+        EC2_INSTANCE = '65.1.2.123'
         SSH_CREDENTIALS = credentials('my-ssh-credential')
     }
 
@@ -39,6 +39,9 @@ pipeline {
                 script {
 
                     sh 'cp -r dist/* /var/www/html'
+                    sshagent(credentials: ['my-ssh-credential']) {
+                      sh "ssh ubuntu@$EC2_INSTANCE 'sudo systemctl restart apache2'"
+                    }
                     // sshagent(credentials: ['my-ssh-credential']) {
                         // sh "scp -o StrictHostKeyChecking=no -r dist/ ubuntu@${EC2_INSTANCE}:/var/www/html/"
                         // sh "ssh -o StrictHostKeyChecking=no ubuntu@${EC2_INSTANCE} 'sudo systemctl restart apache2'"
