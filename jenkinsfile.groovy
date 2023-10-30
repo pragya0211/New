@@ -38,13 +38,13 @@ pipeline {
             steps {
                 script {
 
-                    // sh 'cp -r dist/* /var/www/html'
+                    sh 'cp -r dist/pragya/* /var/www/html'
                     // sh 'sudo systemctl restart apache2'
                     
-                    sshagent(credentials: [SSH_CREDENTIALS]) {
-                        sh 'cp -r dist/* /var/www/html'
-                        sh "ssh -o StrictHostKeyChecking=no 'sudo systemctl restart apache2'"
-                    }
+                    // sshagent(credentials: [SSH_CREDENTIALS]) {
+                    //     sh 'cp -r dist/pragya/* /var/www/html'
+                    //     // sh "ssh -o StrictHostKeyChecking=no 'sudo systemctl restart apache2'"
+                    // }
                 }
             }
         }
