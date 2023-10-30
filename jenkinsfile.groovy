@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         S3_BUCKET = 'my-new-angular-bucket'
+      INVALIDATION_ID = 'E2CKHSL2OK1H7A'
     }
 
     stages {
@@ -19,15 +20,15 @@ pipeline {
             }
         }
 
-      stage('Deploy to S3') {
-        steps {
-            script {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'my-aws-credential']]) {
-                    sh "aws s3 sync dist/pragya/ s3://${S3_BUCKET}"
-                }
-            }
-        }
-      }
+      // stage('Deploy to S3') {
+      //   steps {
+      //       script {
+      //           withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'my-aws-credential']]) {
+      //               sh "aws s3 sync dist/pragya/ s3://${S3_BUCKET}"
+      //           }
+      //       }
+      //   }
+      // }
 
 
         stage('Deploy to EC2') {
@@ -37,6 +38,16 @@ pipeline {
                 }
             }
         }
+
+      stage('cloud front invalidation') {
+        steps {
+          script {
+            withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'my-aws-credential']]) {
+              sh "aws cloudfront create-invalidation --distribution-id ${INVALIDATION_ID} --paths "/*""
+            }
+          }
+        }
+      }
     }
 
     post {
