@@ -42,8 +42,8 @@ pipeline {
                     // sh 'sudo systemctl restart apache2'
                     
                     sshagent(credentials: [SSH_CREDENTIALS]) {
-                        sh "cp -o StrictHostKeyChecking=no -r dist/* ubuntu@${EC2_INSTANCE}:/var/www/html/"
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@${EC2_INSTANCE} 'sudo systemctl restart apache2'"
+                        sh 'cp -r dist/* /var/www/html'
+                        sh "ssh -o StrictHostKeyChecking=no 'sudo systemctl restart apache2'"
                     }
                 }
             }
