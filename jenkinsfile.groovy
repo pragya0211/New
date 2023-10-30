@@ -37,10 +37,12 @@ pipeline {
         stage('Deploy to EC2') {
             steps {
                 script {
-                    sshagent(credentials: ['my-ssh-credential']) {
-                        sh "scp -o StrictHostKeyChecking=no -r dist/ ubuntu@${EC2_INSTANCE}:/var/www/html/"
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@${EC2_INSTANCE} 'sudo systemctl restart apache2'"
-                    }
+
+                    sh 'cp -r dist/* /var/www/html'
+                    // sshagent(credentials: ['my-ssh-credential']) {
+                        // sh "scp -o StrictHostKeyChecking=no -r dist/ ubuntu@${EC2_INSTANCE}:/var/www/html/"
+                        // sh "ssh -o StrictHostKeyChecking=no ubuntu@${EC2_INSTANCE} 'sudo systemctl restart apache2'"
+                    // }
                 }
             }
         }
