@@ -38,7 +38,7 @@ pipeline {
             steps {
                 script {
 
-                    sh 'cp -r dist/* /var/www/html
+                    sh 'cp -r dist/* /var/www/html'
                 }
             }
         }
