@@ -2,16 +2,12 @@ pipeline {
     agent any
 
     environment {
-        // AWS_REGION = 'ap-south-1'
         S3_BUCKET = 'my-new-angular-bucket'
-        // EC2_INSTANCE = '65.1.2.123'
-        // SSH_CREDENTIALS = credentials('my-ssh-credential')
     }
 
     stages {
         stage('Checkout') {
             steps {
-                // Checkout your source code from your version control system (e.g., Git)
                 checkout scm
             }
         }
@@ -23,7 +19,7 @@ pipeline {
             }
         }
 
-      stage('Upload to S3') {
+      stage('Deploy to S3') {
         steps {
             script {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'my-aws-credential']]) {
@@ -37,7 +33,7 @@ pipeline {
         stage('Deploy to EC2') {
             steps {
                 script {
-                    sh 'cp -r dist/* /var/www/html'
+                    sh 'cp -r dist/pragya/* /var/www/html'
                 }
             }
         }
