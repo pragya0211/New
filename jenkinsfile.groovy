@@ -39,7 +39,7 @@ pipeline {
                 script {
 
                     sh 'cp -r dist/* /var/www/html'
-                    sh "ssh ubuntu@$EC2_INSTANCE 'sudo systemctl restart apache2'"
+                    sh 'sudo systemctl restart apache2'
                     
                     // sshagent(credentials: ['my-ssh-credential']) {
                         // sh "scp -o StrictHostKeyChecking=no -r dist/ ubuntu@${EC2_INSTANCE}:/var/www/html/"
