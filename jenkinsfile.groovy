@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         S3_BUCKET = 'my-new-angular-bucket'
-        DISTRIBUTION_ID = 'E2CKHSL2OK1H7A'
+        // DISTRIBUTION_ID = 'E2CKHSL2OK1H7A'
         PATHS = "/"
     }
 
@@ -44,7 +44,7 @@ pipeline {
         steps {
           script {
             withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'my-aws-credential']]) {
-              sh 'aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths ${PATHS}'
+              sh 'aws cloudfront create-invalidation --distribution-id E2CKHSL2OK1H7A --paths /'
             }
           }
         }
