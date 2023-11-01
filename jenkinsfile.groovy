@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         S3_BUCKET = 'my-new-angular-bucket'
-        INVALIDATION_ID = 'E2CKHSL2OK1H7A'
+        // INVALIDATION_ID = 'E2CKHSL2OK1H7A'
         PATHS = "/*"
     }
 
@@ -63,6 +63,7 @@ pipeline {
               // invalidate distribution and wait for finish
               wait_cmd = """aws cloudfront wait invalidation-completed --distribution-id $DISTRIBUTION_ID --id $INVALIDATION_ID"""
               sh(wait_cmd)
+            }
               // sh 'aws cloudfront create-invalidation --distribution-id ${INVALIDATION_ID} --paths ${PATHS}'
             }
           }
