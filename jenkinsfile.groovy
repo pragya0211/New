@@ -4,7 +4,7 @@ pipeline {
     environment {
         S3_BUCKET = 'my-new-angular-bucket'
         INVALIDATION_ID = 'E2CKHSL2OK1H7A'
-        PATHS = '/*'
+        PATHS = "/*"
     }
 
     stages {
